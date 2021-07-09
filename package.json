@@ -1,0 +1,10 @@
+{
+  "name": "pjax-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "wzc_321@163.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./httpServer.js"
+  }
+}

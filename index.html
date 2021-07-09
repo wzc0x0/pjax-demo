@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pjax</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <p class="currentTime"></p>
+      <ul>
+        <li><a data-pjax href="/about.html">about</a></li>
+      </ul>
+    </div>
+    <div id="app"></div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+    <script>
+      const currentTimeDom = document.querySelector(
+        ".container > .currentTime"
+      );
+      setInterval(() => {
+        currentTimeDom.textContent = +new Date();
+      }, 1000);
+    </script>
+    <script>
+      $(function () {
+        $(document).pjax("a[data-pjax]", "#app");
+      });
+      $(document)
+        .on("pjax:send", NProgress.start)
+        .on("pjax:complete", NProgress.done);
+      $(document).on("pjax:timeout", function (event) {
+        // Prevent default timeout redirection behavior
+        event.preventDefault();
+      });
+    </script>
+  </body>
+</html>
